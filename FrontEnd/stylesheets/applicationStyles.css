@@ -1,0 +1,64 @@
+a {
+    text-decoration: none;
+}
+
+a:link,
+a:visited{
+    color: black
+}
+
+.cloudBannerAWS {
+    text-align: center;
+    font-family: "Optima", sans-serif;
+    float: left;
+    margin: 5% auto 0;
+    margin-left: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    font-size: 50px;
+    width: 500px;
+    height: 60px;
+    background: #9a9b94;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.cloudBannerAWS .formAWS{
+    position: relative;
+    z-index: 1;
+    background: #d4d6c8;
+    margin-top: 0px;
+    text-align: center;
+    height: 400px;
+    width: 500px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.cloudBannerG {
+    text-align: center;
+    font-family: "Optima", sans-serif;
+    float: right;
+    margin: 5% auto 0;
+    margin-right: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    font-size: 50px;
+    width: 500px;
+    background: #9a9b94;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #d4d6c8;
+    margin: 0 auto 100px;
+    padding-top: 25px;
+    text-align: center;
+    height: 200px;
+    width: 700px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
