@@ -11,11 +11,6 @@ app.config.from_envvar('APP_CONFIG')
 queries = pugsql.module('queries/user')
 queries.connect(app.config['DATABASE_URL'])
 
-def validContentType(request, type='application/json'):
-    if request.headers.has_key('Content-Type'):
-        if request.headers['Content-Type'] == type:
-            return True
-    return { 'Error':'Unsupported Media Type', 'Support-Content-Type':type}, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE
 
 @app.route('/', methods=['GET'])
 def home():
@@ -29,9 +24,6 @@ def register():
         data = list(all_users)
         return data, status.HTTP_200_OK
     elif request.method=='POST':
-        valid = validContentType(request)
-        if valid is not True:
-            return valid
         return create_user()
 
 def create_user():
@@ -77,9 +69,6 @@ def delete_user_by_id(id):
 @app.route('/api/v1/cloud/users/login', methods=['POST'])
 def login():
     if request.method=='POST':
-        valid = validContentType(request)
-        if valid is not True:
-            return valid
         return authenticate()
     
 def authenticate():
@@ -100,9 +89,6 @@ def authenticate():
 @app.route('/api/v1/cloud/users/<string:username>/password', methods=['PUT'])
 def password(username):
     if request.method=='PUT':
-        valid = validContentType(request)
-        if valid is not True:
-            return valid
         return update_password(username)
 
 def update_password(username):
