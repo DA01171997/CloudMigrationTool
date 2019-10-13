@@ -67,6 +67,7 @@ a:visited{
 }
 
 .login-page .form .register{
+    padding-top: 20px;
     padding-right: 10px;
     float: right;
 }
