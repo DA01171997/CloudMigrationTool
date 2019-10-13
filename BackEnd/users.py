@@ -3,9 +3,11 @@ import flask_api
 import pugsql
 from flask import request, jsonify, Response
 from flask_api import status, exceptions
+from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = flask_api.FlaskAPI(__name__)
+CORS(app)
 app.config.from_envvar('APP_CONFIG')
 
 queries = pugsql.module('queries/user')
