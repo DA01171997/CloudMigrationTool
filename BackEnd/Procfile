@@ -1,0 +1,2 @@
+users:FLASK_APP=users.py APP_CONFIG=configs/users.cfg flask run -p $PORT
+
