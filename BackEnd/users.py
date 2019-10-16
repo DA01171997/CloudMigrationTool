@@ -30,7 +30,7 @@ def register():
 
 def create_user():
     user = request.data
-    required_fields = ['uName','uUsername','uEmail','uPassword']
+    required_fields = ['uName','uEmail','uPassword']
     if not all([field in user for field in required_fields]):
         raise exceptions.ParseError()
     try:
@@ -41,16 +41,16 @@ def create_user():
     return user, status.HTTP_201_CREATED
 
 
-@app.route('/api/v1/cloud/users/id/<int:id>', methods=['DELETE', 'GET'])
-def user_id(id):
+@app.route('/api/v1/cloud/users/id/<int:uID>', methods=['DELETE', 'GET'])
+def user_id(uID):
     if request.method=='GET':
-        return get_user_by_id(id)
+        return get_user_by_id(uID)
     elif request.method=='DELETE':
-        return delete_user_by_id(id)
+        return delete_user_by_id(uID)
     
-def get_user_by_id(id):
+def get_user_by_id(uID):
     try:
-        user = queries.user_by_id(id=id)
+        user = queries.user_by_id(iuID=uID)
         if user:
             return user, status.HTTP_200_OK
         else:
@@ -58,13 +58,13 @@ def get_user_by_id(id):
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_404_NOT_FOUND 
 
-def delete_user_by_id(id):
+def delete_user_by_id(uID):
     try:
-        affected = queries.user_delete_by_id(id=id)
+        affected = queries.user_delete_by_id(userID=uID)
         if affected == 0:
             return { 'Error': "USER NOT FOUND" },status.HTTP_404_NOT_FOUND
         else:
-            return { 'DELETE REQUEST ACCEPTED': str(id) }, status.HTTP_202_ACCEPTED               
+            return { 'DELETE REQUEST ACCEPTED': str(uID) }, status.HTTP_202_ACCEPTED               
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT 
 
@@ -79,7 +79,7 @@ def authenticate():
     if not all([field in user for field in required_fields]):
         raise exceptions.ParseError()
     try:
-        user2 = queries.authenticate_by_username(**user)
+        user2 = queries.login_by_email(**user)
         if user2:
             if check_password_hash(user2['uPassword'],user['uPassword']):
                 return user2, status.HTTP_200_OK
@@ -87,28 +87,3 @@ def authenticate():
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
 
-
-@app.route('/api/v1/cloud/users/<string:username>/password', methods=['PUT'])
-def password(username):
-    if request.method=='PUT':
-        return update_password(username)
-
-def update_password(username):
-    user = request.data
-    required_fields = ['uUsername','uPassword', 'userNewPassword']
-    if not all([field in user for field in required_fields]):
-        raise exceptions.ParseError()
-    try:
-        user2 = queries.authenticate_by_username(**user)
-        if user2 and username==user2['uUsername']:
-            if check_password_hash(user2['uPassword'],user['uPassword']):
-                user['uPassword'] = generate_password_hash(user['userNewPassword'])
-                affected = queries.user_update_password(**user)
-                if affected == 0:
-                    raise exceptions.ParseError('Update query failed')
-                else:
-                    user2['uPassword'] = user['uPassword']
-                    return user2, status.HTTP_200_OK
-        return { 'Error': 'Login information invalid' }, status.HTTP_401_UNAUTHORIZED
-    except Exception as e:
-        return { 'Error': str(e) }, status.HTTP_409_CONFLICT

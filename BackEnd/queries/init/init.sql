@@ -3,10 +3,9 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
 	uID INTEGER PRIMARY KEY,
 	uName TEXT NOT NULL,
-	uUsername TEXT NOT NULL,
 	uEmail TEXT NOT NULL,
 	uPassword TEXT NOT NULL,
-	UNIQUE(uEmail,uUsername)
+	UNIQUE(uEmail)
 );
 COMMIT;
 

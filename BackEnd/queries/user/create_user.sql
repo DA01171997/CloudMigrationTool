@@ -1,3 +1,3 @@
 -- :name create_user :insert
-INSERT INTO users(uName, uUsername, uEmail, uPassword)
-VALUES(:uName, :uUsername, :uEmail, :uPassword)
+INSERT INTO users(uName, uEmail, uPassword)
+VALUES(:uName, :uEmail, :uPassword)

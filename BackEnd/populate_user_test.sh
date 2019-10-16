@@ -16,7 +16,6 @@ curl --verbose \
 echo
 echo "----------------------------------------------------------------------------------"
 
-
 #login with POST
 curl --verbose \
 	--request POST \
