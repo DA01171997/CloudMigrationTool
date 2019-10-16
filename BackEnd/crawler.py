@@ -3,10 +3,7 @@ import os
 
 def crawl(pwd='/'):
     crawl_cmd = 'du -a -h --time --max-depth=1 ' + pwd + ' 2>/dev/null'
-    path_cmd = 'pwd'
     directory_list = []
-    abs_path = os.popen(path_cmd).read()
-    abs_path = abs_path.split('\n')[0]
     directory = os.popen(crawl_cmd).read()
     directory_split = directory.split('\n')
 
