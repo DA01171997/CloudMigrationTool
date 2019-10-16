@@ -5,6 +5,7 @@ from flask import request, jsonify, Response
 from flask_api import status, exceptions
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
+from crawler import crawl
 
 app = flask_api.FlaskAPI(__name__)
 CORS(app)
@@ -16,7 +17,8 @@ queries.connect(app.config['DATABASE_URL'])
 
 @app.route('/', methods=['GET'])
 def home():
-    return '''<h1>Cloue-Works-SERVICE</h1>'''
+    return crawl(pwd='.')
+    # return '''<h1>Cloue-Works-SERVICE</h1>'''
 
 
 @app.route('/api/v1/cloud/users/register', methods=['POST', 'GET'])
