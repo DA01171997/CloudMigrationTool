@@ -8,20 +8,21 @@ function login(){
 function register(){
     var email = document.getElementById("registerEmail").value
     var password = document.getElementById("registerPassword").value
-    var jsonData = {
+    var jsonData = JSON.stringify({
         "uName": "placeholderName",
         "uEmail": email,
         "uPassword": password
-    }
+    })
+    console.log(jsonData)
     console.log("register clicked" + email + password)
     $.ajax({
         method: 'POST',
-        url: "http://ec2-18-191-243-191.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/register",
+        url: "http://ec2-18-216-87-92.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/register",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
         },
-        data: { jsonData },
+        data: jsonData,
         success: function(response){
             console.log("worked")
         }
