@@ -1,2 +1,2 @@
 #!/bin/bash
-browser-sync start --server --files "stylesheets/*.css, *.html"
+python3 -m http.server

@@ -8,10 +8,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from crawler import crawl
 
 app = flask_api.FlaskAPI(__name__)
+#CORS(app)
+
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 app.config.from_envvar('APP_CONFIG')
 
-queries = pugsql.module('queries/account')
+queries = pugsql.module('queries/user')
 queries.connect(app.config['DATABASE_URL'])
 
 
@@ -22,73 +25,71 @@ def home():
     # return '''<h1>Cloue-Works-SERVICE</h1>'''
 
 
-@app.route('/api/v1/cloud/accounts/register', methods=['POST', 'GET'])
+@app.route('/api/v1/cloud/users/register', methods=['POST', 'GET'])
 @cross_origin()
 def register():
     if request.method=='GET':
-        all_accounts=queries.all_accounts()
-        data = list(all_accounts)
-        return data
+        all_users=queries.all_users()
+        data = list(all_users)
+        return data, status.HTTP_200_OK
     elif request.method=='POST':
-        return create_account()
+        return create_user()
 
-def create_account():
-    account = request.data
-    required_fields = ['aName','aEmail','aPassword']
-    if not all([field in account for field in required_fields]):
+def create_user():
+    user = request.data
+    required_fields = ['uName','uEmail','uPassword']
+    if not all([field in user for field in required_fields]):
         raise exceptions.ParseError()
     try:
-        account['aPassword'] = generate_password_hash(account['aPassword'])
-        account['aID'] = queries.create_account(**account)
+        user['uPassword'] = generate_password_hash(user['uPassword'])
+        user['uID'] = queries.create_user(**user)
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
-    return account, status.HTTP_201_CREATED
+    return user, status.HTTP_201_CREATED
 
 
-@app.route('/api/v1/cloud/accounts/id/<int:aID>', methods=['DELETE', 'GET'])
-@cross_origin()
-def account_id(aID):
+@app.route('/api/v1/cloud/users/id/<int:uID>', methods=['DELETE', 'GET'])
+def user_id(uID):
     if request.method=='GET':
-        return get_account_by_id(aID)
+        return get_user_by_id(uID)
     elif request.method=='DELETE':
-        return delete_account_by_id(aID)
+        return delete_user_by_id(uID)
     
-def get_account_by_id(aID):
+def get_user_by_id(uID):
     try:
-        account = queries.account_by_id(aID=aID)
-        if account:
-            return account
+        user = queries.user_by_id(iuID=uID)
+        if user:
+            return user, status.HTTP_200_OK
         else:
             raise exceptions.ParseError()
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_404_NOT_FOUND 
 
-def delete_account_by_id(aID):
+def delete_user_by_id(uID):
     try:
-        affected = queries.account_delete_by_id(aID=aID)
+        affected = queries.user_delete_by_id(userID=uID)
         if affected == 0:
             return { 'Error': "USER NOT FOUND" },status.HTTP_404_NOT_FOUND
         else:
-            return { 'DELETE REQUEST ACCEPTED': str(aID) }, status.HTTP_202_ACCEPTED               
+            return { 'DELETE REQUEST ACCEPTED': str(uID) }, status.HTTP_202_ACCEPTED               
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT 
 
-@app.route('/api/v1/cloud/accounts/login', methods=['POST'])
-@cross_origin()
+@app.route('/api/v1/cloud/users/login', methods=['POST'])
 def login():
     if request.method=='POST':
         return authenticate()
     
 def authenticate():
-    account = request.data
-    required_fields = ['aEmail','aPassword']
-    if not all([field in account for field in required_fields]):
+    user = request.data
+    required_fields = ['uEmail','uPassword']
+    if not all([field in user for field in required_fields]):
         raise exceptions.ParseError()
     try:
-        account2 = queries.login_by_email(**account)
-        if account2:
-            if check_password_hash(account2['aPassword'],account['aPassword']):
-                return account2
+        user2 = queries.login_by_email(**user)
+        if user2:
+            if check_password_hash(user2['uPassword'],user['uPassword']):
+                return user2, status.HTTP_200_OK
         return { 'Error': 'Login information invalid' }, status.HTTP_401_UNAUTHORIZED
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT

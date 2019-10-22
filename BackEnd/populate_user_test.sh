@@ -3,16 +3,16 @@
 curl --verbose \
 	--request POST \
 	--header 'Content-Type: application/json' \
-	--data @account1.json \
-	http://127.0.0.1:5000/api/v1/cloud/accounts/register
+	--data @user1.json \
+	http://127.0.0.1:5000/api/v1/cloud/users/register
 echo
 
-#pull all account test using GET
-echo "----------------------------------------------------------------------------------"
+#pull all user test using GET
+
 curl --verbose \
 	--header 'Content-Type: application/json' \
 	--request GET \
-	http://127.0.0.1:5000/api/v1/cloud/accounts/register
+	http://127.0.0.1:5000/api/v1/cloud/users/register
 echo
 echo "----------------------------------------------------------------------------------"
 
@@ -20,7 +20,7 @@ echo "--------------------------------------------------------------------------
 curl --verbose \
 	--request POST \
 	--header 'Content-Type: application/json' \
-	--data @accountlogin.json \
-	http://127.0.0.1:5000/api/v1/cloud/accounts/login
+	--data @userlogin.json \
+	http://127.0.0.1:5000/api/v1/cloud/users/login
 echo
 echo "----------------------------------------------------------------------------------"
