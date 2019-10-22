@@ -10,7 +10,7 @@ def crawl(pwd='/'):
         size, time, path = directory[i].split('\t')
         split_path = path.split('/')
         name = split_path[len(split_path) - 1]
-        path = abs_path
+        path = abs_path + '/' + name
         if os.path.isfile(path):
             file_type = 0
         else:
@@ -19,7 +19,7 @@ def crawl(pwd='/'):
     return directory_list
 
 if __name__ == "__main__":
-        print(crawl('/home/max/Desktop/454_Project'))
-        print(crawl('/home/max/Desktop/454_Project/test'))
+        # print(crawl('/home/max/Desktop/454_Project'))
+        # print(crawl('/home/max/Desktop/454_Project/test'))
         print(crawl('.'))
 
