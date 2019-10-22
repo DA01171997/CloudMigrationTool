@@ -94,3 +94,22 @@ def authenticate():
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
 
+@app.route('/api/v1/cloud/crawl', methods=['POST', 'GET'])
+@cross_origin()
+def crawl_cloud():
+    if request.method=='GET':
+        return crawl(pwd='.')
+    elif request.method=='POST':
+        return crawl_cloud_post()
+
+def crawl_cloud_post():
+    crawl_data = request.data
+    required_fields = ['path']
+    if not all([field in crawl_data for field in required_fields]):
+        raise exceptions.ParseError()
+    try:
+        path = crawl_data['path']
+        result = crawl(path)
+    except Exception as e:
+        return { 'Error': str(e) }, status.HTTP_409_CONFLICT
+    return result, status.HTTP_201_CREATED

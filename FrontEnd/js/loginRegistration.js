@@ -24,7 +24,7 @@ function register(){
 		},
         data: jsonData,
         success: function(response){
-            console.log("worked")
+            console.log("worked2")
         }
     })
 }
