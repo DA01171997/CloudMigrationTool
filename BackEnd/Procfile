@@ -1,2 +1,2 @@
-users:FLASK_APP=users.py APP_CONFIG=configs/users.cfg flask run -h 0.0.0.0 -p $PORT
+accounts:FLASK_APP=accounts.py APP_CONFIG=configs/accounts.cfg flask run -h 0.0.0.0 -p $PORT
 
