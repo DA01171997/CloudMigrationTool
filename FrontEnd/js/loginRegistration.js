@@ -13,32 +13,11 @@ function register(){
         "uEmail": email,
         "uPassword": password
     })
-    console.log(jsonData)
-    console.log("register clicked" + email + password)
+    //console.log(jsonData)
+    //console.log("register clicked" + email + password)
     $.ajax({
         method: 'POST',
-        url: "http://18.189.26.44:5000/api/v1/cloud/users/register",
-        headers: {
-            'Content-Type':'application/json',
-            'Access-Control-Allow-Origin': '*'
-		},
-        data: jsonData,
-        success: function(response){
-            console.log("worked")
-        }
-    })
-}
-/*
-function login(){
-    var email = document.getElementById("loginEmail").value
-    var password = document.getElementById("loginPassword").value
-    var jsonData = JSON.stringify({
-        "uEmail": email,
-        "uPassword": password
-    })
-    $.ajax({
-        method: 'POST',
-        url: "ec2-18-219-153-7.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/login",
+        url: "http://ec2-18-216-87-92.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/register",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -48,4 +27,29 @@ function login(){
             console.log("worked")
         }
     })
-}*/
+}
+
+function login(){
+    var email = document.getElementById("loginEmail").value
+    var password = document.getElementById("loginPassword").value
+    var jsonData = JSON.stringify({
+        "uEmail": email,
+        "uPassword": password
+    })
+    $.ajax({
+        method: 'POST',
+        url: "http://ec2-18-216-87-92.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/login",
+        headers: {
+            'Content-Type':'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        data: jsonData,
+        success: function(response){
+            console.log("worked")
+        }
+    })
+}
+
+function redirectToApplication(){
+    window.location.replace("/application.html");
+}

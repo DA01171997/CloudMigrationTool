@@ -28,11 +28,18 @@ a:visited{
     z-index: 1;
     background: #d4d6c8;
     margin-top: 0px;
-    text-align: center;
+    text-align: left;
     height: 400px;
     width: 500px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+.list{
+    font-size: 20px;
+    position: relative; 
+    background: #c7c4c4;
+    padding-left: 0px;
 }
 
 .cloudBannerG {
@@ -50,15 +57,3 @@ a:visited{
     border-top-right-radius: 10px;
 }
 
-.form {
-    position: relative;
-    z-index: 1;
-    background: #d4d6c8;
-    margin: 0 auto 100px;
-    padding-top: 25px;
-    text-align: center;
-    height: 200px;
-    width: 700px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
