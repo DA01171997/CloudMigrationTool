@@ -60,7 +60,10 @@ function startDirectory(jsonData, dir){ //starts at /home/ubuntu/Desktop
     ul.style.listStyle = "none";
     ul.style.fontSize = "15px";
     var expandButton = document.createElement("button");
-    expandButton.innerHTML = "+";
+    expandButton.innerHTML = "+ " + dir + jsonData[0][0] + '/';
+    expandButton.style.fontSize = "15px";
+    expandButton.style.background = "#c7c4c4";
+    expandButton.style.fontFamily = "Optima";
     expandButton.style.background = "#c7c4c4";
     expandButton.style.border = "none";
     expandButton.style.marginBottom = "5px";
@@ -69,7 +72,7 @@ function startDirectory(jsonData, dir){ //starts at /home/ubuntu/Desktop
     expandButton.addEventListener("click", this.ajExpand.bind(null, this, ul, 0, (dir + jsonData[0][0] + '/')), false)
     ul.appendChild(expandButton);
     //ul.appendChild(document.createTextNode(jsonData[0][4]));
-    ul.appendChild(document.createTextNode(dir + jsonData[0][0] + '/'));
+    ul.appendChild(document.createTextNode(''));
     ul.style.paddingLeft = "10px";
     list.appendChild(ul);
 }
@@ -119,15 +122,19 @@ function createChildDirectory(evt, dt, list, pad, dir){
     var li = document.createElement("li");
     li.style.listStyle = "none";
     li.style.fontSize = "15px";
+    li.style.paddingTop = "0px";
+    li.style.paddingBottom = "0px";
     var expandButton = document.createElement("button");
-    expandButton.innerHTML = "+";
+    expandButton.innerHTML = "+ " + dt[0] + '/';
+    expandButton.style.fontSize = "15px";
     expandButton.style.background = "#c7c4c4";
+    expandButton.style.fontFamily = "Optima";
     expandButton.style.border = "none";
-    expandButton.style.marginBottom = "5px";
+    expandButton.style.marginBottom = "0px";
     expandButton.style.paddingLeft = (pad + 10) +"px"; //cascading indentation
     expandButton.addEventListener("click", this.ajExpand.bind(null, this, li, pad + 10, (dir + dt[0] + '/')), false);
     li.appendChild(expandButton);
-    li.appendChild(document.createTextNode(dt[0] + '/'));
+    li.appendChild(document.createTextNode(''));
     list.appendChild(li);
 }
 
