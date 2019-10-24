@@ -28,20 +28,33 @@ var crawlData = [[
     ]
 ]
 
-var updatedCrawl;
-
 window.onload = function(){
-    startDirectory(crawlData);
+    this.requestCrawl();
+    //this.startDirectory(this.crawlData);
 }
 
 function requestCrawl(){
-
+    var dir = "~/Desktop/"
+    var initialCrawl = JSON.stringify({"path": "~/Desktop"});
+    $.ajax({
+        method: 'POST',
+        url: "http://ec2-18-189-26-44.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/crawl",
+        headers: {
+            'Content-Type':'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        data: initialCrawl,
+        success: function(response){
+            console.log(response);
+            startDirectory(response, dir);
+        }
+    })
 }
 
-
-function startDirectory(jsonData){ //starts at /home/ubuntu/Desktop
+function startDirectory(jsonData, dir){ //starts at /home/ubuntu/Desktop
     //DO INITIAL CRAWL
-
+    
+    console.log(jsonData);
     var list = document.getElementById("AWSList");
     var ul = document.createElement("li");
     ul.style.listStyle = "none";
@@ -53,23 +66,41 @@ function startDirectory(jsonData){ //starts at /home/ubuntu/Desktop
     expandButton.style.marginBottom = "5px";
     expandButton.style.paddingLeft = "0px";
     //crawl data should be showing for .../Desktop
-    expandButton.addEventListener("click", this.expandDirectory.bind(null, this, ul, 0), false)
+    expandButton.addEventListener("click", this.ajExpand.bind(null, this, ul, 0, (dir + jsonData[0][0] + '/')), false)
     ul.appendChild(expandButton);
-    ul.appendChild(document.createTextNode(jsonData[0][4]));
+    //ul.appendChild(document.createTextNode(jsonData[0][4]));
+    ul.appendChild(document.createTextNode(dir + jsonData[0][0] + '/'));
     ul.style.paddingLeft = "10px";
     list.appendChild(ul);
 }
-var expandDirectory = function(evt, list, pad){
+
+function ajExpand(evt, list, pad, crawlTarget){
+    var dir = JSON.stringify({
+        "path":crawlTarget
+    });
+    $.ajax({
+        method: 'POST',
+        url: "http://ec2-18-189-26-44.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/crawl",
+        headers: {
+            'Content-Type':'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+        data: dir,
+        success: function(response){
+            console.log(response);
+            expandDirectory(evt, list, pad, response, crawlTarget);
+        }
+    })
+}
+var expandDirectory = function(evt, list, pad,response, dir){
     if(list.childElementCount == 1){ //directory not expanded
-        //do a crawl here to refresh updatedCrawl
-        //pass in list.firstChild.nextSibling 
-        //first child is button, next sib is dir name?
         console.log(list.firstChild.nextSibling);
         event.currentTarget.innerHTML = "-";
-        dt = crawlData; //change to updatedCrawl
+        dt = response; //change to response
         for(var i = 0; i < dt.length; i++){
+            console.log(dt[i]);
             if(dt[i][2] == 1){
-                createChildDirectory(this, dt[i], list, pad);
+                createChildDirectory(this, dt[i], list, pad, dir);
             }
             else {
                 createChildFile(this, dt[i], list, pad);
@@ -84,7 +115,7 @@ var expandDirectory = function(evt, list, pad){
     console.log(list);
 }
 
-function createChildDirectory(evt, dt, list, pad){
+function createChildDirectory(evt, dt, list, pad, dir){
     var li = document.createElement("li");
     li.style.listStyle = "none";
     li.style.fontSize = "15px";
@@ -94,9 +125,9 @@ function createChildDirectory(evt, dt, list, pad){
     expandButton.style.border = "none";
     expandButton.style.marginBottom = "5px";
     expandButton.style.paddingLeft = (pad + 10) +"px"; //cascading indentation
-    expandButton.addEventListener("click", this.expandDirectory.bind(null, this, li, pad + 10), false);
+    expandButton.addEventListener("click", this.ajExpand.bind(null, this, li, pad + 10, (dir + dt[0] + '/')), false);
     li.appendChild(expandButton);
-    li.appendChild(document.createTextNode(dt[4] + dt[0]));
+    li.appendChild(document.createTextNode(dt[0] + '/'));
     list.appendChild(li);
 }
 

@@ -17,14 +17,14 @@ function register(){
     //console.log("register clicked" + email + password)
     $.ajax({
         method: 'POST',
-        url: "http://ec2-18-216-87-92.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/register",
+        url: "http://ec2-18-189-26-44.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/register",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
         },
         data: jsonData,
         success: function(response){
-            console.log("worked2")
+            console.log("worked")
         }
     })
 }
@@ -38,7 +38,7 @@ function login(){
     })
     $.ajax({
         method: 'POST',
-        url: "http://ec2-18-216-87-92.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/login",
+        url: "http://ec2-18-189-26-44.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/login",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
