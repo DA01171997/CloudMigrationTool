@@ -31,7 +31,7 @@ def register():
     if request.method=='GET':
         all_users=queries.all_users()
         data = list(all_users)
-        return data, status.HTTP_200_OK
+        return data
     elif request.method=='POST':
         return create_user()
 
@@ -59,7 +59,7 @@ def get_user_by_id(uID):
     try:
         user = queries.user_by_id(iuID=uID)
         if user:
-            return user, status.HTTP_200_OK
+            return user
         else:
             raise exceptions.ParseError()
     except Exception as e:
@@ -89,7 +89,7 @@ def authenticate():
         user2 = queries.login_by_email(**user)
         if user2:
             if check_password_hash(user2['uPassword'],user['uPassword']):
-                return user2, status.HTTP_200_OK
+                return user2
         return { 'Error': 'Login information invalid' }, status.HTTP_401_UNAUTHORIZED
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT

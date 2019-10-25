@@ -1,12 +1,11 @@
-import sys
 import os
+import sys
 import flask_api
 import pugsql
 from flask import request, jsonify, Response
 from flask_api import status, exceptions
 from flask_cors import CORS, cross_origin
 from werkzeug.security import generate_password_hash, check_password_hash
-
 
 app = flask_api.FlaskAPI(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -33,3 +32,23 @@ def crawl(pwd='/'):
 @cross_origin()
 def home():
     return crawl(pwd='.')
+
+@app.route('/api/v1/cloud/employee/crawl', methods=['POST', 'GET'])
+@cross_origin()
+def crawl_cloud():
+    if request.method=='GET':
+        return crawl(pwd='.')
+    elif request.method=='POST':
+        return crawl_cloud_post()
+
+def crawl_cloud_post():
+    crawl_data = request.data
+    required_fields = ['path']
+    if not all([field in crawl_data for field in required_fields]):
+        raise exceptions.ParseError()
+    try:
+        path = crawl_data['path']
+        result = crawl(path)
+    except Exception as e:
+        return { 'Error': str(e) }, status.HTTP_409_CONFLICT
+    return result, status.HTTP_201_CREATED
