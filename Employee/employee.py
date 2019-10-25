@@ -1,4 +1,15 @@
+import sys
 import os
+import flask_api
+import pugsql
+from flask import request, jsonify, Response
+from flask_api import status, exceptions
+from flask_cors import CORS, cross_origin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+app = flask_api.FlaskAPI(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 def crawl(pwd='/'):
     crawl_cmd = 'du -a -h --time --max-depth=1 ' + pwd + ' 2>/dev/null'
@@ -18,8 +29,7 @@ def crawl(pwd='/'):
         directory_list.append([name, size, file_type, time, path])
     return directory_list
 
-if __name__ == "__main__":
-        #print(crawl('/home/max/Desktop/454_Project'))
-        #print(crawl('/home/max/Desktop/454_Project/test'))
-        print(crawl('.'))
-
+@app.route('/', methods=['GET'])
+@cross_origin()
+def home():
+    return crawl(pwd='.')
