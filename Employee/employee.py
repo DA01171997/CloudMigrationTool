@@ -51,4 +51,23 @@ def crawl_cloud_post():
         result = crawl(path)
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
-    return result, status.HTTP_201_CREATED
+    return result
+
+@app.route('/api/v1/cloud/employee/copy', methods=['POST', 'GET'])
+@cross_origin()
+def copy_cloud():
+    if request.method=='GET':
+        return {}
+    elif request.method=='POST':
+        return copy_cloud_post()
+
+def copy_cloud_post():
+    copy_data = request.data
+    required_fields = ['sourceIP', 'sourcePath', 'destinationIP', 'destinationPath', 'recursive', 'private_key', 'private_key_name']
+    if not all([field in copy_data for field in required_fields]):
+        raise exceptions.ParseError()
+    try:
+        data = copy_data
+    except Exception as e:
+        return { 'Error': str(e) }, status.HTTP_409_CONFLICT
+    return data

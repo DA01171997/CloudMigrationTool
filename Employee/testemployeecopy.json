@@ -1,0 +1,9 @@
+{
+    "sourceIP": "ip",
+    "sourcePath": "ip",
+    "destinationIP": "ip",
+    "destinationPath": "ip",
+    "recursive": "ip",
+    "private_key": "ip",
+    "private_key_name": "ip"
+}
