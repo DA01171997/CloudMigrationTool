@@ -20,6 +20,7 @@ def crawl(pwd='/'):
         directory_list.append([name, size, file_type, time, path])
     return directory_list
 
+
 def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
     with open('key.pem', 'w') as key_file:
         key_file.write(priv_key)
@@ -31,18 +32,38 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     scp.close()
     os.system('rm key.pem')
 
+def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
+    scp = SCPClient(client.get_transport())
+    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.close()
+
+
+def FormKey(path_to_key):
+    with open(path_to_key) as key_file:
+        key_string = ""      
+        key_line = key_file.readline()
+        while key_line:
+            key_string = key_string + key_line
+            key_line = key_file.readline()
+    return key_string
+
 
 
 if __name__ == "__main__":
     # print(crawl('/home/max/Desktop/454_Project'))
     # print(crawl('/home/max/Desktop/454_Project/test'))
     # print(crawl('.'))
-    priv_key = 'enter key here'
+    #priv_key = FormKey('/home/max/Desktop/454_Project/Key_Pairs/cloud_managment_key.pem')
+    priv_key = '/home/max/Desktop/454_Project/Key_Pairs/cloud_managment_key.pem'
     source_path = '/home/max/Desktop/454_Project/test'
     recursive = True
     destination_path = '~/Desktop/'
     destination_ip = '18.189.26.44'
     destination_user = 'ubuntu'
-    transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
+    #transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
+    transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
 
