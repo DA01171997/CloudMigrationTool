@@ -6,7 +6,7 @@ from flask import request, jsonify, Response
 from flask_api import status, exceptions
 from flask_cors import CORS, cross_origin
 from werkzeug.security import generate_password_hash, check_password_hash
-from utility import transfer
+from utility import transfer_with_key_file
 
 app = flask_api.FlaskAPI(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -68,7 +68,7 @@ def copy_cloud_post():
     if not all([field in copy_data for field in required_fields]):
         raise exceptions.ParseError()
     try:
-        #transfer(source_path=copy_data['sourcePath'], destination_ip=copy_data['destinationIP'], destination_user=copy_data['destinationUser'], destination_path=copy_data['destinationPath'],  recursive=copy_data['recursive'], priv_key=copy_data['private_key'])
+        transfer_with_key_file(source_path=copy_data['sourcePath'], destination_ip=copy_data['destinationIP'], destination_user=copy_data['destinationUser'], destination_path=copy_data['destinationPath'],  recursive=copy_data['recursive'], priv_key_file='~/Desktop/key/cloud_managment_key.pem')
         data = copy_data
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
