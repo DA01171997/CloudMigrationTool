@@ -7,3 +7,5 @@ pip3 install --user Flask python-dotenv
 pip3 install --user Flask-API python-dotenv
 pip3 install --user pugsql
 pip3 install --user flask-cors
+pip3 install --user paramiko
+pip3 install --user scp
