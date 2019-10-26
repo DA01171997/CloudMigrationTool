@@ -85,6 +85,7 @@ def copy_cloud_post():
         destination_user = 'ubuntu'
         priv_key = '/home/ubuntu/Desktop/key/cloud_managment_key.pem'
         transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
+        #os.system('python3 utility.py')
         data = copy_data
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT

@@ -33,6 +33,13 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     os.system('rm key.pem')
 
 def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
+    with open('log', 'a') as file:
+        file.append(source_path)
+        file.append(destination_path)
+        file.append(destination_ip)
+        file.append(destination_user)
+        file.append(recursive)
+        file.append(priv_key_file)
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
