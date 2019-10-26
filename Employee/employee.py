@@ -68,7 +68,7 @@ def copy_cloud_post():
     if not all([field in copy_data for field in required_fields]):
         raise exceptions.ParseError()
     try:
-        transfer_with_key_file(source_path=copy_data['sourcePath'], destination_ip=copy_data['destinationIP'], destination_user=copy_data['destinationUser'], destination_path=copy_data['destinationPath'],  recursive=copy_data['recursive'], priv_key_file='~/Desktop/key/cloud_managment_key.pem')
+        transfer_with_key_file(source_path=copy_data['sourcePath'], destination_ip=copy_data['destinationIP'], destination_user=copy_data['destinationUser'], destination_path=copy_data['destinationPath'],  recursive=True, priv_key_file='~/Desktop/key/cloud_managment_key.pem')
         data = copy_data
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT

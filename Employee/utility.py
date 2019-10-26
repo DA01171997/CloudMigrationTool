@@ -57,13 +57,21 @@ if __name__ == "__main__":
     # print(crawl('/home/max/Desktop/454_Project/test'))
     # print(crawl('.'))
     #priv_key = FormKey('/home/max/Desktop/454_Project/Key_Pairs/cloud_managment_key.pem')
-    priv_key = '/home/max/Desktop/454_Project/Key_Pairs/cloud_managment_key.pem'
-    source_path = '/home/max/Desktop/454_Project/test'
+    # priv_key = '/home/max/Desktop/454_Project/Key_Pairs/cloud_managment_key.pem'
+    # source_path = '/home/max/Desktop/454_Project/test'
+    # recursive = True
+    # destination_path = '~/Desktop/'
+    # destination_ip = '18.189.26.44'
+    # destination_user = 'ubuntu'
+    #transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
+
+
+    priv_key = '~/Desktop/key/cloud_managment_key.pem'
+    source_path = '~/Desktop/test'
     recursive = True
     destination_path = '~/Desktop/'
     destination_ip = '18.189.26.44'
     destination_user = 'ubuntu'
-    #transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
     transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
 
