@@ -56,6 +56,13 @@ def crawl_cloud_post():
     return result
 
 def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
+    with open('log2.txt', 'w') as file:
+        file.write(str(source_path)+ "\n")
+        file.write(str(destination_path)+ "\n")
+        file.write(str(destination_ip)+ "\n")
+        file.write(str(destination_user)+ "\n")
+        file.write(str(recursive)+ "\n")
+        file.write(str(priv_key_file)+ "\n")
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
@@ -84,8 +91,10 @@ def copy_cloud_post():
         destination_ip = '18.189.26.44'
         destination_user = 'ubuntu'
         priv_key = '/home/ubuntu/Desktop/key/cloud_managment_key.pem'
-        transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
-        #os.system('python3 utility.py')
+        #transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
+        #os.system("python3 utility.py '/home/ubuntu/Desktop/test' '~/Desktop/' '18.189.26.44' 'ubuntu' 'True' '/home/ubuntu/Desktop/key/cloud_managment_key.pem'")
+        command = "python3 utility.py " + str(source_path) + " " + str(destination_path) + " " + str(destination_ip) + " " +  str(destination_user) + " " +  str(recursive) + " " + str(priv_key)
+        os.system(command)
         data = copy_data
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT

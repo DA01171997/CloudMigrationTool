@@ -1,4 +1,5 @@
 import os
+import sys
 import paramiko
 from scp import SCPClient
 
@@ -33,13 +34,14 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     os.system('rm key.pem')
 
 def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
-    with open('log', 'a') as file:
-        file.append(source_path)
-        file.append(destination_path)
-        file.append(destination_ip)
-        file.append(destination_user)
-        file.append(recursive)
-        file.append(priv_key_file)
+#def transfer_with_key_file(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6]):
+    with open('log.txt', 'w') as file:
+        file.write(str(source_path)+ "\n")
+        file.write(str(destination_path)+ "\n")
+        file.write(str(destination_ip)+ "\n")
+        file.write(str(destination_user)+ "\n")
+        file.write(str(recursive)+ "\n")
+        file.write(str(priv_key_file)+ "\n")
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
@@ -79,6 +81,7 @@ if __name__ == "__main__":
     destination_path = '~/Desktop/'
     destination_ip = '18.189.26.44'
     destination_user = 'ubuntu'
-    transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
+    transfer_with_key_file(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], True, sys.argv[6])
+    #transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
 
