@@ -86,7 +86,7 @@ def copy_cloud_post():
     try:
         # transfer_with_key_file(source_path=copy_data['sourcePath'], destination_ip=copy_data['destinationIP'], destination_user=copy_data['destinationUser'], destination_path=copy_data['destinationPath'],  recursive=True, priv_key_file='~/Desktop/key/cloud_managment_key.pem')
         source_path = '/home/ubuntu/Desktop/test'
-        recursive = True
+        recursive = 'True'
         destination_path = '~/Desktop/'
         destination_ip = '18.189.26.44'
         destination_user = 'ubuntu'
