@@ -6,7 +6,8 @@ from flask import request, jsonify, Response
 from flask_api import status, exceptions
 from flask_cors import CORS, cross_origin
 from werkzeug.security import generate_password_hash, check_password_hash
-from utility import transfer_with_key_file
+import paramiko
+from scp import SCPClient
 
 app = flask_api.FlaskAPI(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -53,6 +54,14 @@ def crawl_cloud_post():
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
     return result
+
+def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
+    scp = SCPClient(client.get_transport())
+    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.close()
 
 @app.route('/api/v1/cloud/employee/copy', methods=['POST', 'GET'])
 @cross_origin()
