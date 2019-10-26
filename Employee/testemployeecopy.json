@@ -1,8 +1,8 @@
 {
-    "sourcePath": "~/Desktop/test",
+    "sourcePath": "/home/ubuntu/Desktop/test",
     "destinationIP": "18.189.26.44",
     "destinationUser": "ubuntu",
-    "destinationPath": "~/Desktop",
+    "destinationPath": "/home/ubuntu/Desktop",
     "recursive": "True",
     "private_key": "ip"
 }

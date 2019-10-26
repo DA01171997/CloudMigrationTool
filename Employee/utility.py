@@ -66,8 +66,8 @@ if __name__ == "__main__":
     #transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
 
-    priv_key = '~/Desktop/key/cloud_managment_key.pem'
-    source_path = '~/Desktop/test'
+    priv_key = '/home/ubuntu/Desktop/key/cloud_managment_key.pem'
+    source_path = '/home/ubuntu/Desktop/test'
     recursive = True
     destination_path = '~/Desktop/'
     destination_ip = '18.189.26.44'
