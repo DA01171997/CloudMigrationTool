@@ -4,5 +4,5 @@
     "destinationUser": "ubuntu",
     "destinationPath": "/home/ubuntu/Desktop",
     "recursive": "True",
-    "private_key": "ip"
+    "private_key": "/home/ubuntu/Desktop/key/cloud_managment_key.pem"
 }
