@@ -20,7 +20,7 @@ def crawl(pwd='/'):
         size, time, path = directory[i].split('\t')
         split_path = path.split('/')
         name = split_path[len(split_path) - 1]
-        path = pwd + '/' + name
+        path = pwd + name
         if os.path.isfile(path):
             file_type = 0
         elif os.path.isdir(path):
