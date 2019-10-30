@@ -13,7 +13,7 @@ def crawl(pwd='/'):
             file_type = 0
         elif os.path.isdir(path):
             file_type = 1
-        else
+        else:
             file_type = 2
         directory_list.append([name, size, file_type, time, path])
     return directory_list
