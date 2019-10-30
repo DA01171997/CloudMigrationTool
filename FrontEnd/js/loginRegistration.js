@@ -45,7 +45,8 @@ function login(){
         },
         data: jsonData,
         success: function(response){
-            console.log("worked")
+            console.log(response)
+            window.location="application.html"
         }
     })
 }
