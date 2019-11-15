@@ -29,7 +29,7 @@ def copy(source_path, destination_path, destination_ip, destination_user, recurs
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
     scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
     os.system('rm key.pem')
 
@@ -38,7 +38,7 @@ def copy_with_key_file(source_path, destination_path, destination_ip, destinatio
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
     scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
 
 def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
@@ -48,7 +48,7 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
     scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
     os.system('rm key.pem')
     delete(source_path, recursive)
@@ -58,12 +58,12 @@ def transfer_with_key_file(source_path, destination_path, destination_ip, destin
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
     scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
     delete(source_path, recursive)
 
 def delete(path, recursive):
-    if recursive:
+    if recursive=='True':
         delete_cmd = "rm -r " + path
     else:
         delete_cmd = "rm " + path
