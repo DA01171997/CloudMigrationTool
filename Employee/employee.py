@@ -55,53 +55,6 @@ def crawl_cloud_post():
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
     return result
 
-def copy(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
-    with open('key.pem', 'w') as key_file:
-        key_file.write(priv_key)
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
-    scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
-    scp.close()
-    os.system('rm key.pem')
-
-def copy_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
-    scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
-    scp.close()
-
-def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
-    with open('key.pem', 'w') as key_file:
-        key_file.write(priv_key)
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
-    scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
-    scp.close()
-    os.system('rm key.pem')
-    delete(source_path, recursive)
-
-def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
-    scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=recursive, remote_path=destination_path)
-    scp.close()
-    delete(source_path, recursive)
-
-def delete(path, recursive):
-    if recursive:
-        delete_cmd = "rm -r " + path
-    else:
-        delete_cmd = "rm " + path
-    os.system(delete_cmd + ' 2>/dev/null')
-
 @app.route('/api/v1/cloud/employee/copy', methods=['POST', 'GET'])
 @cross_origin()
 def copy_cloud():

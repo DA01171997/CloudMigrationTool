@@ -22,7 +22,7 @@ def crawl(pwd='/'):
     return directory_list
 
 
-def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
+def copy(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
     with open('key.pem', 'w') as key_file:
         key_file.write(priv_key)
     client = paramiko.SSHClient()
@@ -33,21 +33,41 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     scp.close()
     os.system('rm key.pem')
 
-def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
-    with open('log.txt', 'w') as file:
-        file.write(str(source_path)+ "\n")
-        file.write(str(destination_path)+ "\n")
-        file.write(str(destination_ip)+ "\n")
-        file.write(str(destination_user)+ "\n")
-        file.write(str(recursive)+ "\n")
-        file.write(str(priv_key_file)+ "\n")
+def copy_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
     scp = SCPClient(client.get_transport())
-    scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
+    scp.put(source_path, recursive=recursive, remote_path=destination_path)
     scp.close()
 
+def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
+    with open('key.pem', 'w') as key_file:
+        key_file.write(priv_key)
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
+    scp = SCPClient(client.get_transport())
+    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.close()
+    os.system('rm key.pem')
+    delete(source_path, recursive)
+
+def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(hostname=destination_ip, username=destination_user, key_filename=priv_key_file)
+    scp = SCPClient(client.get_transport())
+    scp.put(source_path, recursive=recursive, remote_path=destination_path)
+    scp.close()
+    delete(source_path, recursive)
+
+def delete(path, recursive):
+    if recursive:
+        delete_cmd = "rm -r " + path
+    else:
+        delete_cmd = "rm " + path
+    os.system(delete_cmd + ' 2>/dev/null')
 
 def FormKey(path_to_key):
     with open(path_to_key) as key_file:
