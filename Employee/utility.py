@@ -28,6 +28,7 @@ def copy(source_path, destination_path, destination_ip, destination_user, recurs
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
             key_file.write(line + '\n')
+    os.system('chmod 400 key.pem')
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
@@ -50,6 +51,7 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
             key_file.write(line + '\n')
+    os.system('chmod 400 key.pem')
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
