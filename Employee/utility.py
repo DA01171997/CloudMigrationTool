@@ -23,7 +23,7 @@ def crawl(pwd='/'):
 
 
 def copy(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
-    priv_key = priv_key.split('|')
+    priv_key = priv_key.split('.')
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
             key_file.write(line + '\n')
@@ -44,7 +44,7 @@ def copy_with_key_file(source_path, destination_path, destination_ip, destinatio
     scp.close()
 
 def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
-    priv_key = priv_key.split('|')
+    priv_key = priv_key.split('.')
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
             key_file.write(line + '\n')
