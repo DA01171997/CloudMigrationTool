@@ -46,11 +46,11 @@ function login(){
         data: jsonData,
         success: function(response){
             console.log(response)
-            window.location="application.html"
+            window.location="ipInput.html"
         }
     })
 }
 
 function redirectToApplication(){
-    window.location.replace("/application.html");
+    window.location="ipInput.html"
 }

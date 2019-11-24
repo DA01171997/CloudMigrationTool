@@ -1,0 +1,94 @@
+.titleBar{
+    margin: 10% auto 0;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 30px;
+    width: 970px;
+    height: 50px;
+    background: #9a9b94;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-family: "Optima", sans-serif;
+
+}
+.titleBar .nodeSetup {
+    padding-top: 7px;
+    padding-left: 20px;
+    font-size: 30px;
+}
+
+.endBar {
+    margin: 6% auto 0;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 30px;
+    width: 970px;
+    height: 30px;
+    background: #9a9b94;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.continueButton {
+    font-family: "Optima", sans-serif;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 90%;
+}
+
+.leftIP {
+    float: left;
+    margin: 0 auto 0;
+    margin-left: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    width: 500px;
+    height: 100px;
+    background: #d4d6c8;
+}
+
+.rightIP{
+    text-align: left;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    width: 500px;
+    height: 100px;
+    background: #d4d6c8;
+}
+.ipLabel{
+    position: relative;
+    font-family: "Optima", sans-serif;
+    float: center;
+    margin-left:10%;
+    font-size:20px;
+}
+.nodeUsername{
+    font-family: "Optima", sans-serif;
+    font-size:12px;
+}
+
+.inputField{
+    position: relative;
+    font-family: "Optima", sans-serif;
+    margin-left:10%;
+    margin-top: 16px;
+    font-size:12px;
+}
+
+.keyInput{
+    position: relative;
+    margin-left:10%;
+    font-family: "Optima", sans-serif;
+    font-size:12px;
+
+}
+.divider {
+    border: 2px solid #e9e9e5;
+    margin-top:13.25%;    
+    height: 100px;
+    position: absolute;
+    left: 49.5%;
+    top: 15px;
+    border-radius: 5px;
+}
