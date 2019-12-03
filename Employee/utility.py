@@ -28,14 +28,14 @@ def copy(source_path, destination_path, destination_ip, destination_user, recurs
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
             key_file.write(line + '\n')
-    os.system('chmod 700 key.pem')
+    os.system('chmod 400 key.pem')
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
     scp = SCPClient(client.get_transport())
     scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
-    #os.system('rm key.pem')
+    os.system('rm key.pem')
 
 def copy_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
     client = paramiko.SSHClient()
@@ -51,14 +51,14 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
             key_file.write(line + '\n')
-    os.system('chmod 700 key.pem')
+    os.system('chmod 400 key.pem')
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(hostname=destination_ip, username=destination_user, key_filename='key.pem')
     scp = SCPClient(client.get_transport())
     scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
-    #os.system('rm key.pem')
+    os.system('rm key.pem')
     delete(source_path, recursive)
 
 def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
