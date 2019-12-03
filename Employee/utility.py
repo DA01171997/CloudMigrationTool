@@ -24,11 +24,11 @@ def crawl(pwd='/'):
 
 def copy(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
     for i in range(0, 23):
-        if i == 10 or i == 14 or i == 21:
+        if i == 10 or i == 14 or i == 22:
             priv_key = priv_key[:i] + ' ' + priv_key[i + 1:]
     for i in range((len(priv_key) - 22), len(priv_key)):
         if i == len(priv_key) - 9 or i == len(priv_key) - 17 or i == len(priv_key) - 21:
-            priv_key = priv_key[:i] + ' ' + priv_key[i:]
+            priv_key = priv_key[:i] + ' ' + priv_key[i + 1:]
     priv_key = priv_key.split('.')
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
@@ -52,11 +52,11 @@ def copy_with_key_file(source_path, destination_path, destination_ip, destinatio
 
 def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
     for i in range(0, 23):
-        if i == 10 or i == 14 or i == 21:
+        if i == 10 or i == 14 or i == 22:
             priv_key = priv_key[:i] + ' ' + priv_key[i + 1:]
     for i in range((len(priv_key) - 22), len(priv_key)):
         if i == len(priv_key) - 9 or i == len(priv_key) - 17 or i == len(priv_key) - 21:
-            priv_key = priv_key[:i] + ' ' + priv_key[i:]
+            priv_key = priv_key[:i] + ' ' + priv_key[i + 1:]
     priv_key = priv_key.split('.')
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
