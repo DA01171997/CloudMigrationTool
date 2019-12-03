@@ -41,7 +41,7 @@ def copy(source_path, destination_path, destination_ip, destination_user, recurs
     scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
     os.system('chmod 777 key.pem')
-    os.system('rm key.pem')
+    os.system('rm -f key.pem')
 
 def copy_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
     client = paramiko.SSHClient()
@@ -70,7 +70,7 @@ def transfer(source_path, destination_path, destination_ip, destination_user, re
     scp.put(source_path, recursive=(recursive=='True'), remote_path=destination_path)
     scp.close()
     os.system('chmod 777 key.pem')
-    os.system('rm key.pem')
+    os.system('rm -f key.pem')
     delete(source_path, recursive)
 
 def transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key_file):
