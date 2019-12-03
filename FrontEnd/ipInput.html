@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="stylesheets/ipInputStyles.css">
+    <script src="js/ipInputJS.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <div class="titleBar">
+      <div class="nodeSetup">Node setup</div>
+    </div>
+    <div class="leftIP">
+        <div class="ipLabel">Node 1</div>
+        <input type="text" class="inputField" id="leftIP" placeholder="Node 1 IP">
+        <input type="text" class="nodeUsername" id="leftUser" placeholder="Username">
+        <input type="password" class="keyInput" id="leftKey" placeholder="Node 1 key" size="75">
+    </div>
+    <div class="divider"></div>
+
+    <div class="rightIP">
+        <div class="ipLabel">Node 2</div>
+        <input type="text" class="inputField" id="rightIP" placeholder="Node 2 IP">
+        <input type="text" class="nodeUsername" id="rightUser" placeholder="Username">
+        <input type="password" class="keyInput" id="rightKey" placeholder="Node 2 key" size="75">
+    </div>
+    <button class ="printButton" type="button" onClick="print()">print</button>
+    <button class ="testButton" type="button" onClick="testConnect()">testconnection</button>
+    <div class="endBar">
+      <button class ="continueButton" type="button" onClick="next()">continue</button>
+      <button class ="continueButton" type="button" onClick="test_next()">test input</button>
+
+    </div>
+  </body>
+
+
+</html>

@@ -16,7 +16,7 @@
         <div class="login">
           <form>
             <input id= "loginEmail" placeholder="email"/>
-            <input id= "loginPassword" placeholder="password"/>
+            <input type="password" id= "loginPassword" placeholder="password"/>
             <div>
                 <button type="button" onClick="login()">Login</button>
             </div>
@@ -25,7 +25,7 @@
         <div class="divider"></div>
         <div class="register">
           <input id= "registerEmail" placeholder="email"/>
-          <input id= "registerPassword" placeholder="password"/>
+          <input type="password" id= "registerPassword" placeholder="password"/>
           <div>
               <button type="button" onClick="register()">Register</button>
           </div>
@@ -34,7 +34,6 @@
       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
       <script src="js/loginRegistration.js"></script>
     </div>
-    <button onclick="location.href='/application.html'" type="button">
-      skip login</button>
+    <button type="button" onClick="redirectToApplication()">skip login</button>
   </body>
 </html>
