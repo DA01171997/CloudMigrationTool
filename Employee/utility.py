@@ -23,7 +23,12 @@ def crawl(pwd='/'):
 
 
 def copy(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
-    priv_key = priv_key.replace('~', ' ')
+    for i in range(0, 23):
+        if i == 11 or i == 15 or i == 22:
+            priv_key[i] = ' '
+    for i in range(len(priv_key) - 22, len(priv_key))
+        if i == len(priv_key) - 9 or i == len(priv_key) - 17 or i == len(priv_key) - 21:
+            priv_key[i] = ' '
     priv_key = priv_key.split('.')
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
@@ -46,7 +51,12 @@ def copy_with_key_file(source_path, destination_path, destination_ip, destinatio
     scp.close()
 
 def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
-    priv_key = priv_key.replace('~', ' ')
+    for i in range(0, 23):
+        if i == 11 or i == 15 or i == 22:
+            priv_key[i] = ' '
+    for i in range(len(priv_key) - 22, len(priv_key))
+        if i == len(priv_key) - 9 or i == len(priv_key) - 17 or i == len(priv_key) - 21:
+            priv_key[i] = ' '
     priv_key = priv_key.split('.')
     with open('key.pem', 'w') as key_file:
         for line in priv_key:
