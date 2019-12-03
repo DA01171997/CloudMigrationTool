@@ -53,7 +53,7 @@ function startDirectory(jsonData, dir, targetList, toUrl){ //starts at /home/ubu
     console.log(jsonData);
     dt = jsonData;
     for(var i = 0; i < dt.length; i++){
-        console.log(dt[i]);
+        console.log(dt[i][2]);
         if(dt[i][2] == 1){
             var list = document.getElementById(targetList);
             var ul = document.createElement("li");
@@ -222,20 +222,19 @@ function copy(){ //left to right
         }
         var payload = JSON.stringify({
             "sourcePath": currentlyClickedTargetString,
-            "destinationIP": "34.94.33.213",
-            "destinationUser": "ubuntu",
+            "destinationIP": this.localStorage.getItem('ipR'),
+            "destinationUser": this.localStorage.getItem('userR'),
             "destinationPath": currentlyClickedDestinationString,
             "recursive": recursive,
-            //"private_key": "/home/ubuntu/key/google_tester/gcloud-management-key",
-            "private_key": "-----BEGIN~RSA~PRIVATE~KEY-----.MIIEpAIBAAKCAQEAuiqufxOZAyQFPQ42jeVsPHupmKsiJT7voMdsEqezU+ArCArz.+v3KE38CnhW7yd9tcKuk/8PWkYGzuK7Xno5T6VJiPPG8aU4e7eqp5SZgU4/c1KMY.rOWDvcRIbehnH3ZUROiEOyTLo9fIyQr99mX46l+RfreOgmxtjqTEbtHXMD1Ax30I.qwRJ6aw7NbE5giJuYzQHd7lF2KFnD7ut06rpHoADCDwfNWIVoZcHgOblbW+TBTUY.IbACO1HzTY+7aJbBapdD/tfq3hbOfVHMPEupxxjdxsdCEHEerLdvKRAgIT63AWEv.9ycMT+o31dRf9tMFtUvaSu276HBujtqfeaMjEwIDAQABAoIBAQCDlAcg6ckL3zmU.nacRQ0Xsubp0nP/VM1ZKXKiVxtGIRrgjRxqKGzXn8az37oR7ed7v82D7JH9S+Ej+.DxV2i0HjdsbYLELuariRj3nk6+rJJLT/1QZrrQwf48sNY2T/Z7LHwU80Ph1v/+N5.tLsqm4gCnulGlpWyuM/2MZ5kdQuSm4HJHA3Q2/QfOYwAFKepddaQmPVmoTKyv5Dc.lgwtb95wjyg53WVYURdpFdn2DHjhVEDZakD+K/Wvlc0U/DKn3BdUC5MnZcVSF1Fz./vhaU2qht0G73MNriqjqh5h58HWU/YxLb9BXZSOu6ugf1XL8Hc5bvU5PiwI/8xqp.Uv9Uc7uBAoGBAPSB6b5XSMJwGeJXonKf2+uKRN/1Bk0KoorVvxZlFGLPwYtLWfiC.J5AB8k1g7iRGwqZUSVENjO7+miS+rpzNgTZmhOJKQuiCMYmNo6KM9ZGE/GNTCrp9.XEcMbyx1V/qWZjb4SjCGWCs/IxultdMs2RLNibYE8I6GfQcitp1w0qJPAoGBAMLq.xXq25SbCzZ7ZdLEkFHXmu01cMkHTHKQB4ouQNm0DxSPE/NxjhORGK0xRz0mbrpe5.b+ukNB7YjbvAb7ZTjXTR1BadAsRTx1xlSaPXau+6zjNAA6FC4zWYw1YPMXkTtyfS.o7XquHIQyRrj/vco2weLdpF/8kpqO8SlRz42g9X9AoGAfn9f4NvjhsTcf197afYO.n1OPwpZPxjgEU/O1wu5Ul7KInXpEd+9ObJC1PRcy3Y3GUqs0qzxpd5Q9R1lnmTQw.72YmxbRJ3WTOIC4pRIXM3paAxRpHaKhGv3NNaSDkfX6mLzZRm71FjEpD7Z/T7Ac9.3x57arIvim1F7hUliVq/fr0CgYEAqKoKtENrSv0qfJhi953m7pb34Ns0yezqTakr.5eSmk/K9NlSREgwzxGxLr0DjhChpDfVyuY9fYom1K5A7mqP2Ne4T/nVjHYv5aSRk.cphHeqZFI+fyvCpq/cfwz5laEBFVXepRq2suq9WGj/RWfn0l+wNdWE5E1MvUaDc0.zMrTjekCgYB6OpB0W32lmMxeHkUw2e6b85Vwi7u00fu0R9Yvil6MLsHBth4zZpyu.8/9zuS78aIyQAp3u6YLPw+mTU4XVCf23b3qYICCx+9SAh8XpCSiocR33K27mWoV9.wNMf2veoCu5xgiNi3ubiVvyrfqP0RUhv7EU/6ogsqLRMBOGC5zZl4g==.-----END~RSA~PRIVATE~KEY-----",
+            "private_key": this.localStorage.getItem('keyR'),
             "copy_or_transfer" : "1"
         })
                     //="copy_or_transfer" : "0" = copy "1" = transfer
-
-        console.log(payload)
+        console.log("http://"+ this.localStorage.getItem('ipL') +":5001/api/v1/cloud/employee/copy",)
+        //console.log(payload)
         $.ajax({
             method: 'POST',
-            url: "http://3.16.27.35:5001/api/v1/cloud/employee/copy",
+            url: "http://"+ this.localStorage.getItem('ipL') +":5001/api/v1/cloud/employee/copy",
             headers: {
                 'Content-Type':'application/json',
                 'Access-Control-Allow-Origin': '*'
@@ -269,11 +268,11 @@ function duycopy(){ //right to left
         }
         var payload = JSON.stringify({
             "sourcePath": currentlyClickedTargetString,
-            "destinationIP": "3.16.27.35",
-            "destinationUser": "ubuntu",
+            "destinationIP": this.localStorage.getItem('ipL'),
+            "destinationUser": this.localStorage.getItem('userL'),
             "destinationPath": currentlyClickedDestinationString,
             "recursive": recursive,
-            "private_key": "/home/ubuntu/key/amazon_tester/cloud_managment_key.pem",
+            "private_key": this.localStorage.getItem('keyL'),
             "copy_or_transfer" : "1"
         })
         console.log(payload)
@@ -291,6 +290,6 @@ function duycopy(){ //right to left
         })
     }
     else {
-        console.log("select some stuff, you animal")
+        console.log("select some stuff duy")
     }
 }

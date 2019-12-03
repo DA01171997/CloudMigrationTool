@@ -19,7 +19,7 @@ function testConnect(){
     var payload = JSON.stringify({"test":"jasonsuck"})
     $.ajax({
         method: 'POST',
-        url: "http://18.189.26.44:5000/api/v1/cloud/jsonSuckTest",
+        url: "http://3.17.26.49:5000/api/v1/cloud/jsonSuckTest",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -32,19 +32,38 @@ function testConnect(){
 }
 
 function next(){
-    var ipL = document.getElementById("leftIP").value
-    var userL = document.getElementById("leftUser").value
-    var keyL = document.getElementById("leftKey").value
-    var ipR = document.getElementById("rightIP").value
-    var userR = document.getElementById("rightUser").value
-    var keyR = document.getElementById("rightKey").value
-    if(ipL != "" && userL != "" && keyL != "" && ipR != "" && userR != "" && keyR != ""){
-        localStorage.setItem('ipL', ipL)
-        localStorage.setItem('userL', userL)
-        localStorage.setItem('keyL', keyL)
-        localStorage.setItem('ipR', ipR)
-        localStorage.setItem('userR', userR)
-        localStorage.setItem('keyR', keyR)
+    if(document.getElementById("leftIP").value != "" && 
+        document.getElementById("leftUser").value != "" && 
+        document.getElementById("leftKey").value != "" && 
+        document.getElementById("rightIP").value != "" && 
+        document.getElementById("rightUser").value != "" && 
+        document.getElementById("rightKey").value != ""){
+        var keyLString = document.getElementById("leftKey").value
+        var modifiedLString = ""
+        for (var i = 0; i < keyLString.length; i++){
+            if(keyLString[i] == " "){
+            modifiedLString += "."
+            }
+            else {
+                modifiedLString += keyLString[i]
+            }
+        }
+        var keyRString = document.getElementById("rightKey").value
+        var modifiedRString = ""
+        for (var i = 0; i < keyRString.length; i++){
+            if(keyRString[i] == " "){
+            modifiedRString += "."
+            }
+            else {
+                modifiedRString += keyRString[i]
+            }
+        }
+        localStorage.setItem('ipL', document.getElementById("leftIP").value)
+        localStorage.setItem('userL', document.getElementById("leftUser").value)
+        localStorage.setItem('keyL', modifiedLString)
+        localStorage.setItem('ipR', document.getElementById("rightIP").value)
+        localStorage.setItem('userR', document.getElementById("rightUser").value)
+        localStorage.setItem('keyR', modifiedRString)
         window.location.replace("/application.html")
     }
 }
