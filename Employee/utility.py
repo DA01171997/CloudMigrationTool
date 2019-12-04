@@ -23,6 +23,7 @@ def crawl(pwd='/'):
 
 
 def copy(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
+    os.system('sudo rm -f key.pem')
     for i in range(0, 23):
         if i == 10 or i == 14 or i == 22:
             priv_key = priv_key[:i] + ' ' + priv_key[i + 1:]
@@ -52,6 +53,7 @@ def copy_with_key_file(source_path, destination_path, destination_ip, destinatio
     scp.close()
 
 def transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key):
+    os.system('sudo rm -f key.pem')
     for i in range(0, 23):
         if i == 10 or i == 14 or i == 22:
             priv_key = priv_key[:i] + ' ' + priv_key[i + 1:]
