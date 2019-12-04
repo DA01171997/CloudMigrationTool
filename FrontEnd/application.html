@@ -11,25 +11,25 @@
   <body>
     <div class="cloudBannerAWS">
       <div class="cloudName">
-        <button class ="transferButton" type="button" onClick="copy()">---></button>
+
+        <button class ="transferButton" type="button" onClick="copy()">Send</button>
+        <input class ="keepCheck" type="checkbox" id="keep"></input>
         <div class="ipLabel" id="leftIP"></div>
       </div>
       <div class="formAWS">
           <ul class="list" id="AWSList"></ul>
       </div>
-	<button class ="deleteButton" type="button" onClick="deleteLeftStuff()">Delete</button>
     </div>
     <div class="divider"></div>
 
     <div class="cloudBannerG">
       <div class="cloudName">
-          <button class ="transferButton" type="button" onClick="duycopy()"><---</button>
+          <button class ="deleteButton" type="button" onClick="deleteStuff()">Delete</button>
           <div class="ipLabel" id="rightIP"></div>
       </div>
       <div class = "formGoogle">
         <ul class="list" id="GoogleList"></ul>
       </div>
-	<button class ="deleteButton" type="button" onClick="deleteRightStuff()">Delete</button>
     </div>
 
   </body>
