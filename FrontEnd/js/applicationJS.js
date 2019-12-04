@@ -278,7 +278,7 @@ function duycopy(){ //right to left
         console.log(payload)
         $.ajax({
             method: 'POST',
-            url: "http://34.94.33.213:5001/api/v1/cloud/employee/copy",
+            url: "http://"+this.localStorage.getItem('ipR')+":5001/api/v1/cloud/employee/copy",
             headers: {
                 'Content-Type':'application/json',
                 'Access-Control-Allow-Origin': '*'
