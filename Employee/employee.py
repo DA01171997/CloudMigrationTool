@@ -102,7 +102,7 @@ def del_cloud_post():
     try:
         source_path = del_data['sourcePath']
         recursive = del_data['recursive']
-        command = "python3 utility.py" + str(source_path) + " " + str(recursive)
+        command = "python3 utility.py " + str(source_path) + " " + str(recursive)
         os.system(command)
         data = del_data
     except Exception as e:
