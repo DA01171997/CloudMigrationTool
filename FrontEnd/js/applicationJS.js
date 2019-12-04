@@ -292,4 +292,70 @@ function duycopy(){ //right to left
     else {
         console.log("select some stuff duy")
     }
+
+
+
+function deleteLeftStuff(){
+    if(currentlyClickedTarget != null) {
+        var recursive = "False";
+        console.log(currentlyClickedTargetString)
+        console.log(currentlyClickedTargetString.charAt(currentlyClickedTargetString.length - 1))
+        if(currrentlyClickedTargetString.charAt(currentlyClickedTargetString.length - 1) == '/'){
+            recursive = "True"
+            currentlyClickedTargetString = currentlyClickedTargetString.substring(0, currentlyClickedTargetString.length - 1)
+        }
+        var payload = JSON.stringify({
+            "sourcePath": currentlyClickedTargetString,
+            "recursive": recursive
+        })
+        $.ajax({
+            method: 'POST',
+            url: "http://"+ this.localStorage.getItem('ipL') +":5001/api/v1/cloud/employee/delete",
+            headers: {
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            data: payload,
+            success: function(response){
+                console.log(response);
+            }
+        })
+    }
+    else {
+        console.log("left delete button is broken, throw it away")
+    }
+}
+
+
+
+function deleteRightStuff(){
+    if(currentlyClickedTarget != null) {
+        console.log('currentlyClickedString is not null, we in here')
+        var recursive = "False";
+        console.log(currentlyClickedTargetString)
+        console.log(currentlyClickedTargetString.charAt(currentlyClickedTargetString.length - 1))
+        if(currentlyClickedTargetString.charAt(currentlyClickedTargetString.length - 1) == '/'){
+            recursive = "True"
+            currentlyClickedTargetString = currentlyClickedTargetString.substring(0, currentlyClickedTargetString.length - 1)
+        }
+        var payload = JSON.stringify({
+            "sourcePath": currentlyClickedTargetString,
+            "recursive": recursive
+        })
+        $.ajax({
+            method: 'POST',
+            url: "http://"+ this.localStorage.getItem('ipR') +":5001/api/v1/cloud/employee/delete",
+            headers: {
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            data: payload,
+            success: function(response){
+                console.log(response);
+            }
+        })
+    }
+    else {
+        console.log("right delete button is broken, throw it away")
+    }
 }
