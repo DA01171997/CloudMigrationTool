@@ -113,7 +113,7 @@ if __name__ == "__main__":
     # destination_user = 'ubuntu'
     #transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
-    if len(sys.argv == 3):
+    if len(sys.argv) == 3:
         delete(sys.argv[1], sys.argv[2])
     else:
         priv_key = '/home/ubuntu/Desktop/key/cloud_managment_key.pem'
