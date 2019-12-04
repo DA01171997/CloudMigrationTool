@@ -113,17 +113,19 @@ if __name__ == "__main__":
     # destination_user = 'ubuntu'
     #transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
-
-    priv_key = '/home/ubuntu/Desktop/key/cloud_managment_key.pem'
-    source_path = '/home/ubuntu/Desktop/test'
-    recursive = True
-    destination_path = '~/Desktop/'
-    destination_ip = '18.189.26.44'
-    destination_user = 'ubuntu'
-    if sys.argv[7] == '0':
-        copy(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
-    elif sys.argv[7] == '1':
-        transfer(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
-    #transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
+    if len(sys.argv == 3):
+        delete(sys.argv[1], sys.argv[2])
+    else:
+        priv_key = '/home/ubuntu/Desktop/key/cloud_managment_key.pem'
+        source_path = '/home/ubuntu/Desktop/test'
+        recursive = True
+        destination_path = '~/Desktop/'
+        destination_ip = '18.189.26.44'
+        destination_user = 'ubuntu'
+        if sys.argv[7] == '0':
+             copy(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
+        elif sys.argv[7] == '1':
+            transfer(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
+        #transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
 

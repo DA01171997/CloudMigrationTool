@@ -63,6 +63,14 @@ def copy_cloud():
     elif request.method=='POST':
         return copy_cloud_post()
 
+@app.route('/api/v1/cloud/employee/delete', methods=['POST', 'GET'])
+@cross_origin()
+def del_cloud():
+    if request.method=='GET':
+        return {}
+    elif request.method=='POST':
+        return del_cloud_post()
+
 def copy_cloud_post():
     copy_data = request.data
     required_fields = ['sourcePath', 'destinationIP', 'destinationUser', 'destinationPath', 'recursive', 'private_key', 'copy_or_transfer']
@@ -82,6 +90,21 @@ def copy_cloud_post():
         command = "python3 utility.py " + str(source_path) + " " + str(destination_path) + " " + str(destination_ip) + " " +  str(destination_user) + " " +  str(recursive) + " " + str(priv_key) + " " + str(copy_or_transfer)
         os.system(command)
         data = copy_data
+    except Exception as e:
+        return { 'Error': str(e) }, status.HTTP_409_CONFLICT
+    return data
+
+def del_cloud_post():
+    del_data = request.data
+    required_fields = ['sourcePath', 'recursive']
+    if not all([field in del_data for field in required_fields]):
+        raise exceptions.ParseError()
+    try:
+        source_path = del_data['sourcePath']
+        recursive = del_data['recursive']
+        command = "python3 utility.py" + str(source_path) + " " + str(recursive)
+        os.system(command)
+        data = del_data
     except Exception as e:
         return { 'Error': str(e) }, status.HTTP_409_CONFLICT
     return data
