@@ -28,13 +28,13 @@ function requestCrawl(targetList, isLeftSide){
     console.log(dir)
     console.log(toUrl)
     var initialCrawl = JSON.stringify({
-        //"target": "13.59.63.33",
-        "path": "/home/ubuntu/Desktop/"
+        "url": toUrl,
+        "path": dir
     });
     console.log(initialCrawl)
     $.ajax({
         method: 'POST',
-        url: toUrl,
+        url: "https://46hnjj9jia.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*',
