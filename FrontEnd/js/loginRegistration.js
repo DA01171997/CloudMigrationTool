@@ -13,8 +13,7 @@ function register(){
         "uEmail": email,
         "uPassword": password
     })
-    //console.log(jsonData)
-    //console.log("register clicked" + email + password)
+    console.log(jsonData)
     $.ajax({
         method: 'POST',
         url :"https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/Cloud-Migration-v1-Registration-POST",
@@ -37,6 +36,7 @@ function login(){
         "uEmail": email,
         "uPassword": password
     })
+    console.log(jsonData)
     $.ajax({
         method: 'POST',
         url: "https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/Cloud-Migration-v2-Login-POST",
@@ -48,11 +48,17 @@ function login(){
         data: jsonData,
         success: function(response){
             console.log(response)
-            window.location="ipInput.html"
+            if(response['statusCode'] == "200"){
+                console.log("good")
+            }
+            else {
+                console.log("no good")
+            }
+            //window.location="ipInput.html"
         }
     })
 }
 
 function redirectToApplication(){
-    window.location="ipInput.html"
+    //window.location="ipInput.html"
 }
