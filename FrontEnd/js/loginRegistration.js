@@ -17,7 +17,8 @@ function register(){
     //console.log("register clicked" + email + password)
     $.ajax({
         method: 'POST',
-        url: "http://ec2-3-17-26-49.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/register",
+        url :"https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/Cloud-Migration-v1-Registration-POST",
+        //url: "http://ec2-3-17-26-49.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/register",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -38,7 +39,8 @@ function login(){
     })
     $.ajax({
         method: 'POST',
-        url: "http://ec2-3-17-26-49.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/login",
+        url: "https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/Cloud-Migration-v2-Login-POST",
+        //url: "http://ec2-3-17-26-49.us-east-2.compute.amazonaws.com:5000/api/v1/cloud/users/login",
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'

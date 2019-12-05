@@ -35,7 +35,8 @@ function requestCrawl(targetList, isLeftSide){
     console.log(initialCrawl)
     $.ajax({
         method: 'POST',
-        url: "https://46hnjj9jia.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
+        url: "https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
+        //url: "https://46hnjj9jia.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
         //url: toUrl, //use this to send to employee directly
         headers: {
             'Content-Type':'application/json',
@@ -43,8 +44,8 @@ function requestCrawl(targetList, isLeftSide){
         },
         data: initialCrawl,
         success: function(response){
-            console.log(response);
-            startDirectory(response, dir, targetList, toUrl, isLeftSide);
+            console.log(response['body']);
+            startDirectory(JSON.parse(response['body']), dir, targetList, toUrl, isLeftSide);
         }
     })
 }
@@ -100,7 +101,8 @@ function ajExpand(evt, list, pad, crawlTarget, toUrl, isLeftSide){
     console.log(dir)
     $.ajax({
         method: 'POST',
-        url: "https://46hnjj9jia.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
+        url: "https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
+        //url: "https://46hnjj9jia.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
         //url: toUrl,  //use this to send to employee directly
         headers: {
             'Content-Type':'application/json',
@@ -109,8 +111,7 @@ function ajExpand(evt, list, pad, crawlTarget, toUrl, isLeftSide){
         data: dir,
         success: function(response){
             console.log(response);
-
-            expandDirectory(evt, list, pad, response, crawlTarget, toUrl, isLeftSide);
+            expandDirectory(evt, list, pad, JSON.parse(response['body']), crawlTarget, toUrl, isLeftSide);
         }
     })
 }
