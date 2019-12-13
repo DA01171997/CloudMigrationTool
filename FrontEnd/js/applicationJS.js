@@ -36,8 +36,6 @@ function requestCrawl(targetList, isLeftSide){
     $.ajax({
         method: 'POST',
         url: "https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
-        //url: "https://46hnjj9jia.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
-        //url: toUrl, //use this to send to employee directly
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*',
@@ -102,8 +100,6 @@ function ajExpand(evt, list, pad, crawlTarget, toUrl, isLeftSide){
     $.ajax({
         method: 'POST',
         url: "https://b1m6q7fwp8.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
-        //url: "https://46hnjj9jia.execute-api.us-east-2.amazonaws.com/default/CrawlerAPI",
-        //url: toUrl,  //use this to send to employee directly
         headers: {
             'Content-Type':'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -117,8 +113,6 @@ function ajExpand(evt, list, pad, crawlTarget, toUrl, isLeftSide){
 }
 var expandDirectory = function(evt, list, pad,response, dir, toUrl, isLeftSide){
     if(list.childElementCount == 3){ //directory not expanded
-        //console.log(evt.currentTarget)
-        //event.currentTarget.innerHTML = "-";
         dt = response;
         for(var i = 0; i < dt.length; i++){
             if(dt[i][2] == 1){

@@ -103,18 +103,6 @@ def FormKey(path_to_key):
 
 
 if __name__ == "__main__":
-    # print(crawl('/home/max/Desktop/454_Project'))
-    # print(crawl('/home/max/Desktop/454_Project/test'))
-    # print(crawl('.'))
-    #priv_key = FormKey('/home/max/Desktop/454_Project/Key_Pairs/cloud_managment_key.pem')
-    # priv_key = '/home/max/Desktop/454_Project/Key_Pairs/cloud_managment_key.pem'
-    # source_path = '/home/max/Desktop/454_Project/test'
-    # recursive = True
-    # destination_path = '~/Desktop/'
-    # destination_ip = '18.189.26.44'
-    # destination_user = 'ubuntu'
-    #transfer(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
-
     if len(sys.argv) == 3:
         delete(sys.argv[1], sys.argv[2])
     else:
@@ -128,6 +116,5 @@ if __name__ == "__main__":
              copy(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
         elif sys.argv[7] == '1':
             transfer(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
-        #transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
 
 

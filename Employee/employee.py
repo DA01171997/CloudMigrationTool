@@ -77,7 +77,6 @@ def copy_cloud_post():
     if not all([field in copy_data for field in required_fields]):
         raise exceptions.ParseError()
     try:
-        # transfer_with_key_file(source_path=copy_data['sourcePath'], destination_ip=copy_data['destinationIP'], destination_user=copy_data['destinationUser'], destination_path=copy_data['destinationPath'],  recursive=True, priv_key_file='~/Desktop/key/cloud_managment_key.pem')
         source_path = copy_data['sourcePath']
         recursive = copy_data['recursive']
         destination_path = copy_data['destinationPath']
@@ -85,8 +84,6 @@ def copy_cloud_post():
         destination_user = copy_data['destinationUser']
         priv_key = copy_data['private_key']
         copy_or_transfer = copy_data['copy_or_transfer']	
-        #transfer_with_key_file(source_path, destination_path, destination_ip, destination_user, recursive, priv_key)
-        #os.system("python3 utility.py '/home/ubuntu/Desktop/test' '~/Desktop/' '18.189.26.44' 'ubuntu' 'True' '/home/ubuntu/Desktop/key/cloud_managment_key.pem'")
         command = "python3 utility.py " + str(source_path) + " " + str(destination_path) + " " + str(destination_ip) + " " +  str(destination_user) + " " +  str(recursive) + " " + str(priv_key) + " " + str(copy_or_transfer)
         os.system(command)
         data = copy_data
